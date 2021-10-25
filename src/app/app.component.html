@@ -1,1 +1,13 @@
-<h1> {{title}} </h1>
+<div class="container; height = align-self-auto">
+  <app-header></app-header>
+    <table class="table table-light">
+      <tr>
+        <th *ngFor="let title of titles">
+          {{title}}
+        </th>
+      </tr>
+      <tr app-currency-row *ngFor="let coin of coins;  let i = index" [coin]="coin" [rank]="i+1">
+
+      </tr>
+    </table>
+</div>
