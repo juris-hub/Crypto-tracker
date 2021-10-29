@@ -12,4 +12,6 @@ export interface Coin {
     total_volume: number;
     price_change_percentage_24h: number;
     price_change_percentage_7d_in_currency: number;
+    sparkline_in_7d: Sparkline;
+    ath_date: string;
   }

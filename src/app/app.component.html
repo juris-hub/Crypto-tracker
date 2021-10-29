@@ -1,6 +1,6 @@
 <div class="container; height = align-self-auto">
   <app-header></app-header>
-    <table class="table table-light">
+      <table class="table table-light">
       <tr>
         <th *ngFor="let title of titles">
           {{title}}
@@ -11,3 +11,7 @@
       </tr>
     </table>
 </div>
+
+<jw-modal [coinsObs]="coinsObs" id="crypto-modal" ></jw-modal>
+
+

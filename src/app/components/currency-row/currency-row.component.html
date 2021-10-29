@@ -1,9 +1,9 @@
 <td><span>{{rank}}</span></td>
 <td><img src="{{coin.image}}" alt="{{coin.name}}"><span>{{coin.name}}</span></td>
 <td><span>{{coin.symbol}}</span></td>
-<td><span>${{coin.market_cap}}</span></td>
-<td><span>${{coin.current_price}}</span></td>
-<td><span>${{coin.total_volume}}</span></td>
-<td><span [ngClass]="coin.price_change_percentage_24h > 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_24h}} %</span></td>
-<td><span [ngClass]="coin.price_change_percentage_7d_in_currency > 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_7d_in_currency.toFixed(5)}} %</span></td>
-
+<td><span>{{coin.market_cap | currency}}</span></td>
+<td><span>{{coin.current_price | currency}}</span></td>
+<td><span>{{coin.total_volume | currency}}</span></td>
+<td><span [ngClass]="coin.price_change_percentage_24h >= 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_24h | number:"1.2-4"}}</span></td>
+<td><span [ngClass]="coin.price_change_percentage_7d_in_currency >= 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_7d_in_currency | number: ".2-4"}}</span></td>
+<td><span><button class="btn" (click)="openModal('crypto-modal')">Show</button></span></td>

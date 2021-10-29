@@ -4,8 +4,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from "./components/header/header.component";
 import { CurrencyRowComponent } from './components/currency-row/currency-row.component';
-import {FormsModule} from "@angular/forms";
-
+import { FormsModule } from "@angular/forms";
+import { ModalModule } from "./modal";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,9 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ModalModule,
+    NgbModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
