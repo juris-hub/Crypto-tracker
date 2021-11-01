@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
     'Volume(24h)',
     '% 24h',
     '% 7d',
-    'Show diagram'
+    'Show Diagram'
   ]
   coins: Coin[] = [];
   coin: Coin;
@@ -37,13 +37,16 @@ export class AppComponent implements OnInit{
           console.log(res)
           this.coins = res
           this.coin = this.coins[0]
-          this.coin.sparkline_in_7d.price = this.coin.sparkline_in_7d.price.map(function (eachElement){
-            return Number(eachElement.toFixed(2));
-          })
-        },
+      },
         (err) => console.log(err)
       );
-  }
+    }
+
+    getCoin(coinName : string){
+
+      return this.http.get<Coin[]>(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinName}&order=market_cap_desc&per_page=100&page=1&sparkline=true`);
+
+    }
 
 
 }

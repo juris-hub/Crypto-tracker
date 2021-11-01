@@ -12,43 +12,53 @@ export class ChartComponent implements OnInit {
 
   @Input() coinsObs : Observable<Coin[]>;
 
+
   series: apex.ApexAxisChartSeries;
   chart: apex.ApexChart;
   title: apex.ApexTitleSubtitle;
   legend: apex.ApexLegend;
-  labels: string[];
+  xaxis : apex.ApexXAxis;
+  data : Coin;
+  dates? : String[];
 
   constructor() { }
 
   ngOnInit(): void {
     this.initializeChartOptions()
-    this.coinsObs.subscribe(coins =>
-
-      this.showCoin(coins[0])
-    );
+    this.subscribeToCoins()
   }
 
     public showCoin( coin: Coin ) {
+
+    this.title = {
+      text : coin.name + ' to USD chart'
+    }
+
     this.series = [{
       name: coin.name,
-      data: coin.sparkline_in_7d.price,
+      data: coin.sparkline_in_7d.price.map((x) => Number(x.toFixed(0))),
 
     }];
 
     let date = Date.parse(coin.ath_date);
-    console.log(date);
-    this.labels = [];
-     for (let i = coin.sparkline_in_7d.price.length; i > 0; i--) {
-        if(i % 10 != 0 ){
-          this.labels.push(new Date((i * 3600) * 1000).toTimeString())
-        }
+    for (let i = coin.sparkline_in_7d.price.length; i > 0; i--) {
+      this.dates?.push(new Date((date * 3600) * 1000).toTimeString())
      }
+    this.xaxis ={
+      type: "category",
+      categories: this.dates,
+      min: new Date("01 Mar 2012").getTime(),
+      tickAmount: 6
+    }
+
+
+
    }
 
   private initializeChartOptions(): void {
 
     this.title = {
-      text: 'Popular Languages'
+      text: ''
     };
 
     this.series = [{
@@ -56,7 +66,12 @@ export class ChartComponent implements OnInit {
       data: []
     }];
 
-    this.labels = [];
+    this.xaxis = {
+
+      type: "datetime",
+      categories: [],
+
+    };
 
 
     this.chart = {
@@ -74,6 +89,14 @@ export class ChartComponent implements OnInit {
       }
     };
 
+  }
+
+  private subscribeToCoins(){
+    this.coinsObs.subscribe(coins =>
+
+      this.showCoin(coins[0])
+
+    );
   }
 
 }
