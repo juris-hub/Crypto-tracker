@@ -6,4 +6,4 @@
 <td><span>{{coin.total_volume | currency}}</span></td>
 <td><span [ngClass]="coin.price_change_percentage_24h >= 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_24h | number:"1.2-4"}}</span></td>
 <td><span [ngClass]="coin.price_change_percentage_7d_in_currency >= 0 ? 'text-success' : 'text-danger'" >{{coin.price_change_percentage_7d_in_currency | number: ".2-4"}}</span></td>
-<td><span><button class="btn" (click)="openModal('crypto-modal')">Show</button></span></td>
+<td><span><button class="btn" (click)="getCoin(coin.name)">Show</button></span></td>

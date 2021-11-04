@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class ChartComponent implements OnInit {
 
-  @Input() coinsObs : Observable<Coin[]>;
+  @Input() coinsObs : Observable<Coin>;
 
 
   series: apex.ApexAxisChartSeries;
@@ -94,7 +94,7 @@ export class ChartComponent implements OnInit {
   private subscribeToCoins(){
     this.coinsObs.subscribe(coins =>
 
-      this.showCoin(coins[0])
+      this.showCoin(coins)
 
     );
   }
