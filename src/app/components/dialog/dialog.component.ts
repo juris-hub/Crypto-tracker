@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NewCoin } from 'src/app/Coin';
 
 @Component({
   selector: 'app-dialog',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogComponent implements OnInit {
 
-  constructor() { }
+  selected = 'option2';
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: NewCoin) {
+   }
 
   ngOnInit(): void {
+    console.log(this.data)
   }
 
 }

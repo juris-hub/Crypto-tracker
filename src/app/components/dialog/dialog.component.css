@@ -1,0 +1,21 @@
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  color: black;
+  font-size: large;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: black;
+}
+
+.content-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 2em 2em;
+}
+

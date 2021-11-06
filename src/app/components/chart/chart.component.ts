@@ -1,102 +1,64 @@
 import {Component, Input, OnInit} from '@angular/core';
-import * as apex from 'ng-apexcharts';
-import {Coin} from "../../Coin";
-import {Observable} from "rxjs";
+import {ChartData, Coin, NewCoin, SeriesObject} from "../../Coin";
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
 
-  @Input() coinsObs : Observable<Coin>;
+  view: any[] = [];
 
+  // options
+  legend: boolean = false;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  xScaleMin: number = 5;
+  xScaleMax: number = 10;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Date';
+  yAxisLabel: string = 'Price($)';
+  timeline: boolean = true;
 
-  series: apex.ApexAxisChartSeries;
-  chart: apex.ApexChart;
-  title: apex.ApexTitleSubtitle;
-  legend: apex.ApexLegend;
-  xaxis : apex.ApexXAxis;
-  data : Coin;
-  dates? : String[];
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
+
+  @Input() receivedCoin : NewCoin;
+
+  series: any[] = [];
+  chartDataArray: ChartData[] = [];
+
+  multi: {
+    name: "coin"
+    series: {name: string,value : number}[]
+ }[];
 
   constructor() { }
 
+
   ngOnInit(): void {
-    this.initializeChartOptions()
-    this.subscribeToCoins()
+    this.showCoin(this.receivedCoin);
   }
 
-    public showCoin( coin: Coin ) {
+    public showCoin( coin: NewCoin ) {
+      var chartData: ChartData = {
+        name: "value",
+        series: []
+      };
 
-    this.title = {
-      text : coin.name + ' to USD chart'
+    this.receivedCoin.prices.map(x => {
+      chartData.series.push({
+        name: new Date(x[0]).toLocaleDateString(),
+        value: x[1]
+      })
+    })
+
+    this.chartDataArray.push(chartData);
+
     }
-
-    this.series = [{
-      name: coin.name,
-      data: coin.sparkline_in_7d.price.map((x) => Number(x.toFixed(0))),
-
-    }];
-
-    let date = Date.parse(coin.ath_date);
-    for (let i = coin.sparkline_in_7d.price.length; i > 0; i--) {
-      this.dates?.push(new Date((date * 3600) * 1000).toTimeString())
-     }
-    this.xaxis ={
-      type: "category",
-      categories: this.dates,
-      min: new Date("01 Mar 2012").getTime(),
-      tickAmount: 6
     }
-
-
-
-   }
-
-  private initializeChartOptions(): void {
-
-    this.title = {
-      text: ''
-    };
-
-    this.series = [{
-      name: "",
-      data: []
-    }];
-
-    this.xaxis = {
-
-      type: "datetime",
-      categories: [],
-
-    };
-
-
-    this.chart = {
-      type: 'line'
-
-    };
-
-    this.legend = {
-      show: true,
-      position: 'top',
-      horizontalAlign: 'left',
-      showForSingleSeries: true,
-      onItemClick: {
-        toggleDataSeries: false
-      }
-    };
-
-  }
-
-  private subscribeToCoins(){
-    this.coinsObs.subscribe(coins =>
-
-      this.showCoin(coins)
-
-    );
-  }
-
-}

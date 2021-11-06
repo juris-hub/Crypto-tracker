@@ -1,8 +1,24 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-  <app-chart></app-chart>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+
+<div class="dialog-white">
+  <div mat-dialog-title class="dialog-header">
+    <mat-dialog-actions align="end">
+      <button style="color: black; font-size: larger;" mat-button mat-dialog-close><strong>X</strong></button>
+      <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+    </mat-dialog-actions>
+  </div>
+  <mat-dialog-content class="mat-typography">
+      <app-chart [receivedCoin]="data"></app-chart>
+      <div class="dialog-content">
+        <div class="content-item"><h3><strong>More content</strong></h3>
+          <span>More details</span>
+        </div>
+        <div class="content-item"><h3><strong>More content</strong></h3>
+          <span>More details</span>
+        </div><div class="content-item"><h3><strong>More content</strong></h3>
+          <span>More details</span>
+        </div><div class="content-item"><h3><strong>More content</strong></h3>
+          <span>More details</span>
+        </div>
+      </div>
+  </mat-dialog-content>
+</div>

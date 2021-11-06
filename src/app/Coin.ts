@@ -15,3 +15,19 @@ export interface Coin {
     sparkline_in_7d: Sparkline;
     ath_date: string;
   }
+
+  export interface NewCoin {
+    prices : number[][];
+    market_caps: number[];
+    total_volumes: number[];
+  }
+
+  export interface ChartData{
+    name: string;
+    series: SeriesObject[]
+  }
+
+  export interface SeriesObject {
+    name: string,
+    value: number
+  }

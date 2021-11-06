@@ -34,7 +34,6 @@ export class AppComponent implements OnInit{
 
     this.coinsObs = this.http.get<Coin[]>('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h,24h,7d');
       this.coinsObs.subscribe((res) => {
-          console.log(res)
           this.coins = res
           this.coin = this.coins[0]
       },
