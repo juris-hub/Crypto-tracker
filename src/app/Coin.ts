@@ -14,6 +14,9 @@ export interface Coin {
     price_change_percentage_7d_in_currency: number;
     sparkline_in_7d: Sparkline;
     ath_date: string;
+    max_supply : string;
+    high_24h : number;
+    low_24h : number;
   }
 
   export interface NewCoin {

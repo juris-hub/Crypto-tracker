@@ -17,6 +17,8 @@ export class CurrencyRowComponent implements OnInit {
   newCoin? : Observable<NewCoin[]> = new Observable<NewCoin[]>();
   coinId : String;
   date = new Date();
+  dataArray : [any, any];
+
 
   year = this.date.getFullYear()
   month = this.date.getMonth();
@@ -31,16 +33,19 @@ export class CurrencyRowComponent implements OnInit {
   ngOnInit(){
   }
 
-  getCoin(name : string){
+  getCoin(name : string, coin : Coin){
 
     this.coinId = name.toLowerCase();
     console.log(this.coinId)
     this.newCoin = this.http.get<NewCoin[]>(`https://api.coingecko.com/api/v3/coins/${this.coinId}/market_chart/range?vs_currency=usd&from=${this.oneYearAgo}&to=${this.today}`);
     this.newCoin.subscribe((res) => {
-      const dialogRef = this.dialog.open(DialogComponent, { data: res, height: '600px',
+      this.dataArray = [res,coin]
+      const dialogRef = this.dialog.open(DialogComponent, { data: this.dataArray, height: '600px',
       width: '900px'});
   },
   );
 
   }
+
+
 }

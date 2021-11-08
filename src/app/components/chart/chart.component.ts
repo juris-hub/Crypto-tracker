@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { Subject } from 'rxjs';
 import {ChartData, Coin, NewCoin, SeriesObject} from "../../Coin";
 
 @Component({
@@ -9,6 +10,7 @@ import {ChartData, Coin, NewCoin, SeriesObject} from "../../Coin";
 export class ChartComponent {
 
   view: any[] = [];
+  update$ : Subject<any> = new Subject();
 
   // options
   legend: boolean = false;
@@ -30,8 +32,9 @@ export class ChartComponent {
 
   @Input() receivedCoin : NewCoin;
 
+
   series: any[] = [];
-  chartDataArray: ChartData[] = [];
+  @Input() chartDataArray: ChartData[] = [];
 
   multi: {
     name: "coin"
@@ -42,10 +45,10 @@ export class ChartComponent {
 
 
   ngOnInit(): void {
-    this.showCoin(this.receivedCoin);
+    this.showCoin();
   }
 
-    public showCoin( coin: NewCoin ) {
+    public showCoin() {
       var chartData: ChartData = {
         name: "value",
         series: []
@@ -61,4 +64,8 @@ export class ChartComponent {
     this.chartDataArray.push(chartData);
 
     }
+
+    updateChart(){
+      this.update$.next(true);
     }
+}

@@ -1,23 +1,26 @@
 
 <div class="dialog-white">
   <div mat-dialog-title class="dialog-header">
+    <div class="intervals">
+      <button mat-button (click)="getDataForMonthsBack(12)"><strong>1 Y</strong></button>
+      <button mat-button (click)="getDataForMonthsBack(6)"><strong>6 M</strong></button>
+      <button mat-button (click)="getDataForMonthsBack(3)"><strong>3 M</strong></button>
+    </div>
+    <div class="exit"><button style= "font-size: larger;" mat-button mat-dialog-close><strong>X</strong></button></div>
     <mat-dialog-actions align="end">
-      <button style="color: black; font-size: larger;" mat-button mat-dialog-close><strong>X</strong></button>
       <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
     </mat-dialog-actions>
   </div>
   <mat-dialog-content class="mat-typography">
-      <app-chart [receivedCoin]="data"></app-chart>
+      <app-chart [receivedCoin]="seriesReset"></app-chart>
       <div class="dialog-content">
-        <div class="content-item"><h3><strong>More content</strong></h3>
-          <span>More details</span>
+        <div class="content-item"><h3><strong>High 24h</strong></h3>
+          <span>{{data[1].high_24h | currency}}</span>
         </div>
-        <div class="content-item"><h3><strong>More content</strong></h3>
-          <span>More details</span>
-        </div><div class="content-item"><h3><strong>More content</strong></h3>
-          <span>More details</span>
-        </div><div class="content-item"><h3><strong>More content</strong></h3>
-          <span>More details</span>
+        <div class="content-item"><h3><strong>Low 24h</strong></h3>
+          <span>{{data[1].low_24h | currency}}</span>
+        </div><div class="content-item"><h3><strong>Max Supply</strong></h3>
+          <span>{{data[1].max_supply | number}}</span>
         </div>
       </div>
   </mat-dialog-content>

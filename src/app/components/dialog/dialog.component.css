@@ -19,3 +19,33 @@
   padding: 2em 2em;
 }
 
+.exit{
+
+}
+
+.mat-button {
+  background-color: grey;
+  color: white;
+  padding-left: 1em;
+  margin: 0.5em;
+}
+
+.intervals{
+  padding-right: 17em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-button:hover {
+  background-color: #505050;
+  color: white;
+  padding-left: 1em;
+  margin: 0.5em;
+}
+
+.mat-button:active {
+  background-color: green;
+  color: white;
+  padding-left: 1em;
+  margin: 0.5em;
+}
