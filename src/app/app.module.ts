@@ -13,7 +13,6 @@ import { ChartComponent } from './components/chart/chart.component';
 import {MatButtonModule} from '@angular/material/button';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 import {MatSelectModule} from '@angular/material/select';
-import { RemoveMinusSignPipe } from './components/remove-minus-sign.pipe';
 
 
 
@@ -24,7 +23,6 @@ import { RemoveMinusSignPipe } from './components/remove-minus-sign.pipe';
     CurrencyRowComponent,
     DialogComponent,
     ChartComponent,
-    RemoveMinusSignPipe
   ],
   imports: [
     BrowserModule,
