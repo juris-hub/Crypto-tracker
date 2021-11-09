@@ -20,11 +20,13 @@ export class DialogComponent implements OnInit {
 
 
   year = this.date.getFullYear()
-  month = this.date.getMonth();
-  day = this.date.getDay();
+  month = this.date.getMonth() + 1;
+  day = this.date.getDate();
+  hour = this.date.getHours();
 
   today = Number(this.date.getTime().toFixed(0).substring(0,10));
-  wantedTime = Number(new Date(this.year, this.month - 3, this.day).getTime().toFixed(0).substring(0,10));
+  wantedTime = Number(new Date(this.year, this.month, this.day).getTime().toFixed(0).substring(0,10));
+  wantedTimeHours = Number(new Date(this.year, this.month, this.day).getTime().toFixed(0).substring(0,10));
 
   series : NewCoin = {
     market_caps: [],
@@ -54,11 +56,13 @@ export class DialogComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(this.data[1].max_supply == null){
+      this.data[1].max_supply = 'No max supply';
+    }
     this.seriesReset = this.data[0];
   }
 
   getDataForMonthsBack(monthsBack: number){
-
     this.child.chartDataArray = [];
     this.chartData = [];
     this.wantedTime = Number(new Date(this.year, this.month - monthsBack, this.day).getTime().toFixed(0).substring(0,10));
@@ -70,24 +74,41 @@ export class DialogComponent implements OnInit {
         series: []
       };
     this.seriesReset = res;
-    console.log(this.seriesReset)
-    this.seriesReset.prices.map(x => {
+    this.seriesReset.prices.forEach(x => {
       chartData.series.push({
         name: new Date(x[0]).toLocaleDateString(),
         value: x[1]
       })
+    })
+    this.chartData.push(chartData);
+    this.child.chartDataArray = [...this.chartData];
+    },
+    );
+  }
 
-    console.log(chartData)
+  getLastWeekData(day : number){
+    this.child.chartDataArray = [];
+    this.chartData = [];
+    this.wantedTime = Number(new Date(this.year, this.month, this.day - day).getTime().toFixed(0).substring(0,10));
+
+    this.newData = this.http.get<NewCoin>(`https://api.coingecko.com/api/v3/coins/${this.data[1].id}/market_chart/range?vs_currency=usd&from=${this.wantedTime}&to=${this.today}`);
+    this.newData.subscribe((res) => {
+      var chartData: ChartData = {
+        name: "value",
+        series: []
+      };
+    this.seriesReset = res;
+    this.seriesReset.prices.forEach(x => {
+      chartData.series.push({
+        name :new Date(x[0]).toLocaleString(),
+        value: x[1]
+      })
     })
 
     this.chartData.push(chartData);
     this.child.chartDataArray = [...this.chartData];
 
-    console.log(chartData)
     },
     );
-
-
   }
-
 }

@@ -17,6 +17,7 @@ export interface Coin {
     max_supply : string;
     high_24h : number;
     low_24h : number;
+    circulating_supply: number;
   }
 
   export interface NewCoin {

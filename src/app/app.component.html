@@ -1,12 +1,20 @@
+<app-header></app-header>
+
+<input
+type="text"
+class="form-control text-center"
+(keyup)="searchCoin()"
+[(ngModel)]="searchText"
+>
+
 <div class="container; height = align-self-auto">
-  <app-header></app-header>
       <table class="table table-light">
       <tr>
         <th *ngFor="let title of titles">
           {{title}}
         </th>
       </tr>
-      <tr app-currency-row *ngFor="let coin of coins;  let i = index" [coin]="coin" [rank]="i+1">
+      <tr app-currency-row *ngFor="let coin of filteredCoins;  let i = index" [coin]="coin" [rank]="i+1">
 
       </tr>
     </table>

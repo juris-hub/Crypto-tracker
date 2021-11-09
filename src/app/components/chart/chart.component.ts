@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Subject } from 'rxjs';
-import {ChartData, Coin, NewCoin, SeriesObject} from "../../Coin";
+import {ChartData, NewCoin} from "../../Coin";
 
 @Component({
   selector: 'app-chart',

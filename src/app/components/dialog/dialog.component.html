@@ -4,7 +4,9 @@
     <div class="intervals">
       <button mat-button (click)="getDataForMonthsBack(12)"><strong>1 Y</strong></button>
       <button mat-button (click)="getDataForMonthsBack(6)"><strong>6 M</strong></button>
-      <button mat-button (click)="getDataForMonthsBack(3)"><strong>3 M</strong></button>
+      <button mat-button (click)="getLastWeekData(60)"><strong>1 M</strong></button>
+      <button mat-button (click)="getLastWeekData(37)"><strong> 7 D</strong></button>
+      <button mat-button (click)="getLastWeekData(31)"><strong>24 H</strong></button>
     </div>
     <div class="exit"><button style= "font-size: larger;" mat-button mat-dialog-close><strong>X</strong></button></div>
     <mat-dialog-actions align="end">
@@ -14,13 +16,15 @@
   <mat-dialog-content class="mat-typography">
       <app-chart [receivedCoin]="seriesReset"></app-chart>
       <div class="dialog-content">
-        <div class="content-item"><h3><strong>High 24h</strong></h3>
+        <div class="content-item"><h3><strong>High 24h (7d)</strong></h3>
           <span>{{data[1].high_24h | currency}}</span>
         </div>
-        <div class="content-item"><h3><strong>Low 24h</strong></h3>
+        <div class="content-item"><h3><strong>Low 24h (7d)</strong></h3>
           <span>{{data[1].low_24h | currency}}</span>
+        </div><div class="content-item"><h3><strong>Circulating Supply</strong></h3>
+          <span>{{data[1].circulating_supply}}</span>
         </div><div class="content-item"><h3><strong>Max Supply</strong></h3>
-          <span>{{data[1].max_supply | number}}</span>
+          <span>{{data[1].max_supply}}</span>
         </div>
       </div>
   </mat-dialog-content>
