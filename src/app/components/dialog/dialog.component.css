@@ -45,3 +45,8 @@
   padding-left: 1em;
   margin: 0.5em;
 }
+
+.dialog-title{
+  color: black;
+  font-weight:bold;
+}

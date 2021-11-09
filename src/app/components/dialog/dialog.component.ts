@@ -58,6 +58,8 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
     if(this.data[1].max_supply == null){
       this.data[1].max_supply = 'No max supply';
+    }else{
+      this.data[1].max_supply = this.data[1].max_supply.toLocaleString();
     }
     this.seriesReset = this.data[0];
   }
@@ -98,6 +100,7 @@ export class DialogComponent implements OnInit {
         series: []
       };
     this.seriesReset = res;
+    console.log(this.seriesReset)
     this.seriesReset.prices.forEach(x => {
       chartData.series.push({
         name :new Date(x[0]).toLocaleString(),

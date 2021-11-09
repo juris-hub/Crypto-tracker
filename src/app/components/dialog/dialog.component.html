@@ -1,5 +1,6 @@
 
 <div class="dialog-white">
+  <h1 class = "dialog-title">{{data[1].name + " to USD chart"}}</h1>
   <div mat-dialog-title class="dialog-header">
     <div class="intervals">
       <button mat-button (click)="getDataForMonthsBack(12)"><strong>1 Y</strong></button>
@@ -22,7 +23,7 @@
         <div class="content-item"><h3><strong>Low 24h (7d)</strong></h3>
           <span>{{data[1].low_24h | currency}}</span>
         </div><div class="content-item"><h3><strong>Circulating Supply</strong></h3>
-          <span>{{data[1].circulating_supply}}</span>
+          <span>{{data[1].circulating_supply | number}}</span>
         </div><div class="content-item"><h3><strong>Max Supply</strong></h3>
           <span>{{data[1].max_supply}}</span>
         </div>
